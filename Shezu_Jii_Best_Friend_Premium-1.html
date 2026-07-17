@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shezu Jii - Best Friend</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins,sans-serif;overflow:hidden;background:linear-gradient(135deg,#d9f6ff,#ffe1ef,#fff5c8);height:100vh}
+.page{position:absolute;inset:0;display:none;justify-content:center;align-items:center;flex-direction:column;text-align:center;padding:24px}
+.active{display:flex}
+.card{background:rgba(255,255,255,.22);backdrop-filter:blur(12px);padding:28px;border-radius:24px;max-width:760px;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+h1{font-family:'Dancing Script',cursive;font-size:clamp(42px,7vw,72px);color:#ff4f8b}
+p{margin:18px 0;font-size:1.1rem;color:#333}
+button{padding:14px 30px;border:none;border-radius:999px;background:#ff4f8b;color:#fff;font-size:18px;cursor:pointer}
+.float{position:fixed;bottom:-30px;animation:rise linear forwards}
+@keyframes rise{to{transform:translateY(-120vh) rotate(360deg);opacity:0}}
+#gift{font-size:110px;cursor:pointer;transition:.4s}
+#gift:hover{transform:scale(1.1) rotate(-8deg)}
+.conf{position:fixed;width:10px;height:16px;top:-20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+#final h2{font-size:58px;color:#ff4f8b;font-family:'Dancing Script',cursive;animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+</style>
+</head>
+<body>
+
+<div id="p1" class="page active">
+<div class="card">
+<div style="font-size:90px">🧸</div>
+<h1>Hey Shezu Jii! 🌸</h1>
+<p>This little surprise is just to remind you that you're an amazing friend.</p>
+<button onclick="show(2)">Open Surprise 🎁</button>
+</div>
+</div>
+
+<div id="p2" class="page">
+<div class="card">
+<h1>Why You're Awesome ✨</h1>
+<p id="reason"></p>
+<button onclick="show(3)">Continue ➜</button>
+</div>
+</div>
+
+<div id="p3" class="page">
+<div class="card">
+<div id="gift">🎁</div>
+<h1>A Message For You 💛</h1>
+<p id="letter"></p>
+<button onclick="finish()">Celebrate 🎉</button>
+</div>
+</div>
+
+<div id="final" class="page">
+<div class="card">
+<h2>Best Friend Forever 💛</h2>
+<div style="font-size:90px">🥳🎈🌸⭐</div>
+<p>Thank you for being such an incredible friend. I hope every day brings you happiness, success, peace, and lots of reasons to smile. Never stop being the wonderful person you are. 🌼</p>
+</div>
+</div>
+
+<script>
+const pages=[...document.querySelectorAll('.page')];
+function show(n){pages.forEach(p=>p.classList.remove('active'));document.getElementById('p'+n).classList.add('active');}
+
+const reasons=[
+"💛 You always spread positivity.",
+"🌸 You make every conversation enjoyable.",
+"🤝 You're loyal, caring and kind.",
+"✨ The world is brighter with friends like you."
+];
+let r=0;
+setInterval(()=>{let e=document.getElementById('reason');if(e)e.textContent=reasons[r++%reasons.length]},1500);
+
+const msg="True friendship isn't measured by how often we talk, but by knowing we care about each other. Thank you for being an amazing friend, Shezu Jii. Wishing you endless smiles and unforgettable memories! 💛";
+let i=0;
+(function type(){let e=document.getElementById('letter');if(e&&i<msg.length){e.textContent+=msg[i++];setTimeout(type,35)}})();
+
+setInterval(()=>{
+ let f=document.createElement('div');
+ f.className='float';
+ f.textContent=['🌸','⭐','✨','🎈'][Math.floor(Math.random()*4)];
+ f.style.left=Math.random()*100+'vw';
+ f.style.fontSize=(18+Math.random()*22)+'px';
+ f.style.animationDuration=(4+Math.random()*3)+'s';
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),7000);
+},250);
+
+function finish(){
+ show('final');
+ for(let i=0;i<250;i++){
+  let c=document.createElement('div');
+  c.className='conf';
+  c.style.left=Math.random()*100+'vw';
+  c.style.background='hsl('+Math.random()*360+',100%,60%)';
+  c.style.animationDuration=(2+Math.random()*3)+'s';
+  document.body.appendChild(c);
+ }
+}
+</script>
+</body>
+</html>
